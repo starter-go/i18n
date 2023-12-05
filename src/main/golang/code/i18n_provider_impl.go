@@ -107,6 +107,14 @@ func (inst *resourcesImpl) GetString(name string) (string, error) {
 	return table.GetPropertyRequired(name)
 }
 
+func (inst *resourcesImpl) String(name string) string {
+	str, err := inst.GetString(name)
+	if err != nil {
+		str = "[" + err.Error() + "]"
+	}
+	return str
+}
+
 func (inst *resourcesImpl) getStrings() properties.Table {
 	table := inst.strings
 	if table != nil {

@@ -22,16 +22,21 @@ func (inst *TestI18nRes) Units(list []*units.Registration) []*units.Registration
 	list = append(list, &units.Registration{
 		Name:    "test-i18n-res",
 		Enabled: true,
-		Test:    inst.test,
+		Test:    inst.testGetString,
 	})
 	return list
 }
 
-func (inst *TestI18nRes) test() error {
-	str, err := inst.Service.Default().GetString("a.b.c")
-	if err != nil {
-		return err
+func (inst *TestI18nRes) testGetString() error {
+
+	keys := make([]string, 0)
+	keys = append(keys, "a.b.c")
+	keys = append(keys, "i.j.k")
+	keys = append(keys, "x.y.z")
+
+	for i, key := range keys {
+		val := inst.Service.Default().String(key)
+		vlog.Info("test[%d] String(%s) = %s", i, key, val)
 	}
-	vlog.Debug(str)
 	return nil
 }

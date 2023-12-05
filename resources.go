@@ -9,4 +9,6 @@ type Resources interface {
 	ReadJSON(path string, root any) error
 
 	GetString(name string) (string, error)
+
+	String(name string) string
 }

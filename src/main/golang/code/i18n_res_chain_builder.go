@@ -70,6 +70,14 @@ func (inst *node) GetString(name string) (string, error) {
 	return inst.next.GetString(name)
 }
 
+func (inst *node) String(name string) string {
+	str, err := inst.GetString(name)
+	if err != nil {
+		str = "[" + err.Error() + "]"
+	}
+	return str
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 type ending struct{}
@@ -97,6 +105,14 @@ func (inst *ending) read(path string) error {
 func (inst *ending) GetString(name string) (string, error) {
 	err := fmt.Errorf("no i18n string with name [%s]", name)
 	return "", err
+}
+
+func (inst *ending) String(name string) string {
+	str, err := inst.GetString(name)
+	if err != nil {
+		str = "[" + err.Error() + "]"
+	}
+	return str
 }
 
 ////////////////////////////////////////////////////////////////////////////////
