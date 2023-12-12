@@ -11,4 +11,6 @@ type Resources interface {
 	GetString(name string) (string, error)
 
 	String(name string) string
+
+	Names() []string
 }

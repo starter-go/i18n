@@ -38,6 +38,28 @@ type node struct {
 
 func (inst *node) _impl() i18n.Resources { return inst }
 
+func (inst *node) Names() []string {
+
+	src1 := inst.next.Names()
+	src2 := inst.target.Names()
+	tmp := make(map[string]bool)
+
+	for _, name := range src1 {
+		tmp[name] = true
+	}
+	for _, name := range src2 {
+		tmp[name] = true
+	}
+
+	dst := []string{}
+	for name := range tmp {
+		dst = append(dst, name)
+	}
+
+	// sort.Strings(dst)
+	return dst
+}
+
 func (inst *node) ReadText(path string) (string, error) {
 	text, err := inst.target.ReadText(path)
 	if err == nil {
@@ -83,6 +105,10 @@ func (inst *node) String(name string) string {
 type ending struct{}
 
 func (inst *ending) _impl() i18n.Resources { return inst }
+
+func (inst *ending) Names() []string {
+	return []string{}
+}
 
 func (inst *ending) ReadText(path string) (string, error) {
 	err := inst.read(path)

@@ -65,6 +65,7 @@ func (inst *ProviderImpl) makeRes(l i18n.Language) i18n.Resources {
 	res := &resourcesImpl{
 		lang: l,
 		src:  src,
+		ac:   inst.AC,
 	}
 	return res
 }
@@ -72,6 +73,7 @@ func (inst *ProviderImpl) makeRes(l i18n.Language) i18n.Resources {
 ////////////////////////////////////////////////////////////////////////////////
 
 type resourcesImpl struct {
+	ac      application.Context
 	src     resources.Table
 	lang    i18n.Language
 	strings properties.Table
@@ -82,6 +84,10 @@ func (inst *resourcesImpl) _impl() i18n.Resources { return inst }
 func (inst *resourcesImpl) computePath(path string) string {
 	lang := inst.lang.String()
 	return "res:///i18n/" + lang + "/" + path
+}
+
+func (inst *resourcesImpl) Names() []string {
+	return inst.getStrings().Names()
 }
 
 func (inst *resourcesImpl) ReadText(path string) (string, error) {
@@ -126,14 +132,16 @@ func (inst *resourcesImpl) getStrings() properties.Table {
 }
 
 func (inst *resourcesImpl) loadStrings() properties.Table {
+
+	path1 := "strings.properties"
+	path2 := inst.computePath(path1)
+
+	loader := new(i18nStringsLoader)
+	loader.ac = inst.ac
+	src := loader.load(path2)
+
 	mode := safe.Safe()
-	str, err := inst.ReadText("strings.properties")
-	if err != nil {
-		return properties.NewTable(mode)
-	}
-	table, _ := properties.Parse(str, mode)
-	if table == nil {
-		table = properties.NewTable(mode)
-	}
-	return table
+	dst := properties.NewTable(mode)
+	dst.Import(src)
+	return dst
 }
