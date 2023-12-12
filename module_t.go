@@ -9,8 +9,8 @@ import (
 
 const (
 	theModuleName     = "github.com/starter-go/i18n"
-	theModuleVersion  = "v0.0.1"
-	theModuleRevision = 1
+	theModuleVersion  = "v0.0.2"
+	theModuleRevision = 2
 )
 
 ////////////////////////////////////////////////////////////////////////////////
