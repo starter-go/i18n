@@ -9,6 +9,7 @@ import (
 	"github.com/starter-go/application/resources"
 	"github.com/starter-go/base/safe"
 	"github.com/starter-go/i18n"
+	"github.com/starter-go/vlog"
 )
 
 // ProviderImpl ...
@@ -95,9 +96,13 @@ func (inst *resourcesImpl) ReadText(path string) (string, error) {
 	return inst.src.ReadText(p2)
 }
 
-func (inst *resourcesImpl) ReadBinary(path string) ([]byte, error) {
-	p2 := inst.computePath(path)
-	return inst.src.ReadBinary(p2)
+func (inst *resourcesImpl) ReadBinary(path1 string) ([]byte, error) {
+	path2 := inst.computePath(path1)
+	bin, err := inst.src.ReadBinary(path2)
+	if err != nil {
+		vlog.Warn(err.Error())
+	}
+	return bin, err
 }
 
 func (inst *resourcesImpl) ReadJSON(path string, root any) error {
