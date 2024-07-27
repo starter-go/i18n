@@ -31,6 +31,7 @@ func (inst*autoRegistrar) addAll() error {
 
     
     inst.register(&p856ff22f92_code_TestI18nRes{})
+    inst.register(&p856ff22f92_code_TestI18nServiceUnit{})
 
 
     return nil

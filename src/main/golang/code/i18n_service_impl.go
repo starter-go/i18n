@@ -92,7 +92,7 @@ func (inst *cache) loadAll() {
 
 	s := util.Sorter{
 		OnLen:  func() int { return len(dst) },
-		OnLess: func(i1, i2 int) bool { return dst[i1].Priority < dst[i2].Priority },
+		OnLess: func(i1, i2 int) bool { return dst[i1].Priority > dst[i2].Priority },
 		OnSwap: func(i1, i2 int) { dst[i1], dst[i2] = dst[i2], dst[i1] },
 	}
 	s.Sort()

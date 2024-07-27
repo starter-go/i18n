@@ -18,7 +18,8 @@ func (inst *i18nResourceChainBuilder) create() i18n.Resources {
 	items := inst.items
 	var p i18n.Resources
 	p = &ending{}
-	for _, item := range items {
+	for i := len(items) - 1; i >= 0; i-- {
+		item := items[i]
 		n := &node{}
 		n.next = p
 		n.target = item.Resources
