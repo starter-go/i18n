@@ -18,11 +18,11 @@ func TestI18nServiceAvailable(t *testing.T) {
 		"--debug.enabled=1",
 	}
 	mod := getTestModule()
-	cfg := &units.Config{
-		Args:   args,
-		Cases:  code.CaseTestServiceAvailable,
-		Module: mod,
-		T:      t,
+	cfg := &units.Context{
+		Arguments: args,
+		Selector:  code.CaseTestServiceAvailable,
+		Module:    mod,
+		T:         t,
 	}
 	units.Run(cfg)
 }
@@ -32,11 +32,11 @@ func TestI18nServiceDefault(t *testing.T) {
 		"--debug.enabled=1",
 	}
 	mod := getTestModule()
-	cfg := &units.Config{
-		Args:   args,
-		Cases:  code.CaseTestServiceDefault,
-		Module: mod,
-		T:      t,
+	cfg := &units.Context{
+		Arguments: args,
+		Selector:  code.CaseTestServiceDefault,
+		Module:    mod,
+		T:         t,
 	}
 	units.Run(cfg)
 }
@@ -46,11 +46,11 @@ func TestI18nServiceGetResources(t *testing.T) {
 		"--debug.enabled=1",
 	}
 	mod := getTestModule()
-	cfg := &units.Config{
-		Args:   args,
-		Cases:  code.CaseTestServiceGetResources,
-		Module: mod,
-		T:      t,
+	cfg := &units.Context{
+		Arguments: args,
+		Selector:  code.CaseTestServiceGetResources,
+		Module:    mod,
+		T:         t,
 	}
 	units.Run(cfg)
 }

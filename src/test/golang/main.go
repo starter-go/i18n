@@ -9,8 +9,8 @@ import (
 
 func main() {
 	m := i18n.ModuleForTest()
-	units.Run(&units.Config{
-		Args:   os.Args,
-		Module: m,
+	units.Run(&units.Context{
+		Arguments: os.Args,
+		Module:    m,
 	})
 }

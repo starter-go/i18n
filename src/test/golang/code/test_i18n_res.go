@@ -17,21 +17,21 @@ type TestI18nRes struct {
 
 }
 
-func (inst *TestI18nRes) _impl() units.Units { return inst }
+func (inst *TestI18nRes) _impl() units.Unit { return inst }
 
 // Units ...
-func (inst *TestI18nRes) Units(list []*units.Registration) []*units.Registration {
+func (inst *TestI18nRes) ListRegistrations(list []*units.Registration) []*units.Registration {
 
 	list = append(list, &units.Registration{
 		Name:    "test-i18n-res",
 		Enabled: true,
-		Test:    inst.testGetString,
+		Do:      inst.testGetString,
 	})
 
 	list = append(list, &units.Registration{
 		Name:    "test-i18n-list-strings",
 		Enabled: true,
-		Test:    inst.testListStrings,
+		Do:      inst.testListStrings,
 	})
 
 	return list

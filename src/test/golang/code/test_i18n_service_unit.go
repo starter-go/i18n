@@ -15,28 +15,28 @@ type TestI18nServiceUnit struct {
 
 }
 
-func (inst *TestI18nServiceUnit) _impl() units.Units {
+func (inst *TestI18nServiceUnit) _impl() units.Unit {
 	return inst
 }
 
 // Units ...
-func (inst *TestI18nServiceUnit) Units(list []*units.Registration) []*units.Registration {
+func (inst *TestI18nServiceUnit) ListRegistrations(list []*units.Registration) []*units.Registration {
 
 	list = append(list, &units.Registration{
 		Name:    CaseTestServiceAvailable,
-		Test:    inst.testAvailable,
+		Do:      inst.testAvailable,
 		Enabled: true,
 	})
 
 	list = append(list, &units.Registration{
 		Name:    CaseTestServiceDefault,
-		Test:    inst.testDefault,
+		Do:      inst.testDefault,
 		Enabled: true,
 	})
 
 	list = append(list, &units.Registration{
 		Name:    CaseTestServiceGetResources,
-		Test:    inst.testGetResources,
+		Do:      inst.testGetResources,
 		Enabled: true,
 	})
 
