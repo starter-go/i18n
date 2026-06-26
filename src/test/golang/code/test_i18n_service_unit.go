@@ -1,6 +1,8 @@
 package code
 
 import (
+	"context"
+
 	"github.com/starter-go/i18n"
 	"github.com/starter-go/units"
 	"github.com/starter-go/vlog"
@@ -43,7 +45,7 @@ func (inst *TestI18nServiceUnit) ListRegistrations(list []*units.Registration) [
 	return list
 }
 
-func (inst *TestI18nServiceUnit) testAvailable() error {
+func (inst *TestI18nServiceUnit) testAvailable(cc context.Context) error {
 	all := inst.Service.Available()
 	for i, lang := range all {
 		vlog.Info("i18n.langs[%d] = %s", i, lang)
@@ -51,7 +53,7 @@ func (inst *TestI18nServiceUnit) testAvailable() error {
 	return nil
 }
 
-func (inst *TestI18nServiceUnit) testDefault() error {
+func (inst *TestI18nServiceUnit) testDefault(cc context.Context) error {
 	def := inst.Service.Default()
 	list := def.Names()
 	for i, name := range list {
@@ -60,7 +62,7 @@ func (inst *TestI18nServiceUnit) testDefault() error {
 	return nil
 }
 
-func (inst *TestI18nServiceUnit) testGetResources() error {
+func (inst *TestI18nServiceUnit) testGetResources(cc context.Context) error {
 	res := inst.Service.GetResources("zh_cn", "default", "fr_fr", "en_us")
 	key := "strings.a"
 	val, _ := res.GetString(key)

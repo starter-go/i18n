@@ -8,9 +8,14 @@ import (
 )
 
 func main() {
+
+	a := os.Args
 	m := i18n.ModuleForTest()
-	units.Run(&units.Context{
-		Arguments: os.Args,
-		Module:    m,
-	})
+	c := new(units.Context)
+
+	c.Arguments = a
+	c.Module = m
+	c.UsePanic = true
+
+	units.Run(c)
 }

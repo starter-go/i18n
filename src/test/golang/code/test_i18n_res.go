@@ -1,6 +1,7 @@
 package code
 
 import (
+	"context"
 	"sort"
 
 	"github.com/starter-go/i18n"
@@ -37,7 +38,7 @@ func (inst *TestI18nRes) ListRegistrations(list []*units.Registration) []*units.
 	return list
 }
 
-func (inst *TestI18nRes) testGetString() error {
+func (inst *TestI18nRes) testGetString(cc context.Context) error {
 
 	keys := make([]string, 0)
 	keys = append(keys, "a.b.c")
@@ -51,7 +52,7 @@ func (inst *TestI18nRes) testGetString() error {
 	return nil
 }
 
-func (inst *TestI18nRes) testListStrings() error {
+func (inst *TestI18nRes) testListStrings(cc context.Context) error {
 
 	// res := inst.Service.Default()
 	res := inst.Service.GetResources("default", "en_US", "zh_CN")
